@@ -50,3 +50,41 @@ p2p.startBluetoothClient(this, new NetworkServiceCallback() {
 		 */
 	}
 });
+
+Create your own messages by extending com.appsonfire.p2p.Message. 
+Messages are converted to JSON string before sending to peers.
+Received text messages (in JSON format) are converted to Message instances and delivered to application via NetworkListener interface.
+```java
+package test;
+
+import com.appsonfire.p2p.Message;
+
+public class ConnectMessage extends Message {
+	private String data;
+
+	public ConnectMessage() {
+		this.type = MessageType.CONNECT;
+	}
+	
+	public void setData(String data) {
+		this.data = data;
+	}
+	
+	public String getData() {
+		return this.data;
+	}	
+}
+```
+
+You should implement NetworkListener and register it to a NetworkService.
+
+```java
+package com.appsonfire.p2p;
+public interface NetworkListener {
+	
+	public void messageReceived(Message message);
+
+	public void connectionLost(String endPoint);
+	
+}
+```
