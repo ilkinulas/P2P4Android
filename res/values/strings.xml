@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">P2P4Android</string>
+	<string name="please_wait">Please wait</string>
+	<string name="starting_server">Starting Server</string>
+	<string name="bluetooth_enabled">Bluetooth enabled.</string>
+	<string name="searching_bluetooth_server">Searching bluetooth server...</string>
+</resources>
