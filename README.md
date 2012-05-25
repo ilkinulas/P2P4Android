@@ -7,30 +7,18 @@ p2p.startBluetoothServer(this, new NetworkServiceCallback() {
 	
 	@Override
 	public void onSuccess(NetworkService networkService) {
-		getOkeyApplication().setNetworkService(networkService);
-		networkService.registerNetworkListener(ActivityServer.this);
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				progressDialog.dismiss();
-				makeToast(ActivityServer.this, getString(R.string.bt_server_ready));
-				Button button = (Button) findViewById(R.id.start_bt_game_button);
-				button.setEnabled(true);
-			}
-		});
+		//Register a network listener for receiving messages from peers.
+		networkService.registerNetworkListener(this);
+		
+		//You can send messages to peers through networkService.
 	}
 	
 	@Override
 	public void onFailure(int reason) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				progressDialog.dismiss();
-				makeToast(ActivityServer.this, getString(R.string.bt_failed_to_start_server));
-				//ActivityDashboard'a geri don.
-				finish();
-			}
-		});
+		/*
+		 * For a list of failure reasons see 
+		 * https://github.com/ilkinulas/P2P4Android/blob/master/src/com/appsonfire/p2p/NetworkServiceCallback.java
+		 */
 	}
 });
 ```
